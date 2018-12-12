@@ -1,15 +1,16 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
+header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename=data.csv');
 include_once 'simplehtmldom_1_5/simple_html_dom.php';
 function findAndCompare(){
 	//storing user inputs into variables
-	$url1 = urlencode($_POST['website_url1']);
-	$url2 = urlencode($_POST['website_url2']);
+	//$uri = urlencode('http://...')
+	$url1 = $_POST['website_url1'];
+	$url2 = $_POST['website_url2'];
 	if(!empty($url1)&&!empty($url2)){
 		
-		$html1 = file_get_html($url1);
-		$html2 = file_get_html($url2);
+		$html1 = file_get_contents($url1);
+		$html2 = file_get_contents($url2);
 		
 		if(!empty($html1&&!empty($html2))){
 			$url1_links = array();
