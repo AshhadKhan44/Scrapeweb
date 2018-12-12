@@ -15,7 +15,7 @@ function findAndCompare(){
 		if(!empty($html1&&!empty($html2))){
 			$url1_links = array();
 			$url2_links = array();
-			if($html1 && is_object($html1) && isset($html1->nodes)){
+			if($html1 && is_object($html1)){
 				foreach($html1->find('a[href^="http://www.tuttosport.com"]') as $a)
 				{
 					if($a->href)
@@ -24,7 +24,7 @@ function findAndCompare(){
 					}
 				}	
 			}
-			if($html2 && is_object($html2) && isset($html2->nodes)){
+			if($html2 && is_object($html2)){
 				foreach($html2->find('a[href^="http://www.gazzetta.it"]') as $a)
 				{
 					if($a->href) 
