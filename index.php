@@ -20,7 +20,7 @@
     </head>
 	
 <body>
-	<h1 class="text-center">Task 1</h1>
+	<h1 class="text-center">Web Scraping</h1>
 		<section style="margin-top:40px;">
 			<div class="container">
 			<div class="row">
@@ -28,7 +28,7 @@
 					<form class="well" method="post" action="scrape.php" name="scrape.php" id="scrape_form">
 						<div class="form-group">
 						<label>URL1:</label>	
-						<input type="input" class="form-control" onkeyup="wordCount(), alphabetPosition(this.value)" name="website_url1" id="website_url1">
+						<input type="input" class="form-control" onkeyup="wordCount(), count(this.value)" name="website_url1" id="website_url1">
 						<label>URL2:</label>	
 						<input type="input" onkeyup="wordCount()" class="form-control" name="website_url2" id="website_url2"><br>
 						<input type="submit" class="btn btn-primary" name="submit" value="submit">
@@ -40,7 +40,7 @@
 				<div class="col-sm-6 col-sm-offset-3">
 					<label>Num of Characters typed</label>	
 					<p id="count"></p>
-					<label>Positions of the alphabets:</label>	
+					<label>Sum of the Positions of the alphabets:</label>	
 					<p id="pos"></p>	
 				</div>	
 			</div>	
@@ -49,7 +49,8 @@
 
 		<script type="text/javascript">
 			var text = document.getElementById('website_url1').value;
-				function wordCount(){
+			
+			function wordCount(){
 				var text1 = document.getElementById('website_url1').value;
 				var text2 = document.getElementById('website_url2').value;
 				var ftxt = text1.length+text2.length;
@@ -57,20 +58,39 @@
 				console.log(ftxt);
 				
 			}
-			function alphabetPosition(text) {
-				  var result = "";
-				  var sum = "";
-				  for (var i = 0; i < text.length; i++) {
-					var code = text.toUpperCase().charCodeAt(i)
-					if (code > 64 && code < 91){
-						result += (code - 64);
-						sum+=result[i];
-					} 
-					  console.log(sum);
-				  }
-				  document.getElementById('pos').innerHTML = sum;
+			
+			function str_split(string, split_length) {
+			   if (split_length == null) {
+				   split_length = 1;
+			  }
+			  if (string == null || split_length < 1) {
+				return false;
+			  }
+			  string += '';
+			  var chunks = [],
+				pos = 0,
+				len = string.length;
+			  while (pos < len) {
+				chunks.push(string.slice(pos, pos += split_length));
+			  }
 
+			  return chunks;
+			}
+
+			function count(string){
+				var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+				var splitted_string = str_split(string);
+
+				var count = 0;
+				for (i = 0; i < splitted_string.length; i++) { 
+					var letterPosition = alphabet.indexOf(splitted_string[i])+1;
+					count = count + letterPosition;
 				}
+				document.getElementById('pos').innerHTML = count;
+				return count;
+			}
+		
 		</script>
 	</body>
 </html>
