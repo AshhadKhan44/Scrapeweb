@@ -15,21 +15,26 @@ function findAndCompare(){
 		if(!empty($html1&&!empty($html2))){
 			$url1_links = array();
 			$url2_links = array();
-
-			foreach($html1->find('a[href^="http://www.tuttosport.com"]') as $a)
-			{
-				if($a->href)
+			if($html1 && is_object($html1)){
+				foreach($html1->find('a[href^="http://www.tuttosport.com"]') as $a)
 				{
-					$url1_links[]=$a->href;
-				}
+					if($a->href)
+					{
+						$url1_links[]=$a->href;
+					}
+				}	
 			}
-			foreach($html2->find('a[href^="http://www.gazzetta.it"]') as $a)
-			{
-				if($a->href) 
+			if($html2 && is_object($html2)){
+				foreach($html2->find('a[href^="http://www.gazzetta.it"]') as $a)
 				{
-					$url2_links[]=$a->href;
-				}
+					if($a->href) 
+					{
+						$url2_links[]=$a->href;
+					}
+				}	
 			}
+	
+			
 			$output = fopen('php://output', 'w');
 			foreach($url1_links as $val1)
 			{
