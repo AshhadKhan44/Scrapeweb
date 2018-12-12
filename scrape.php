@@ -9,13 +9,13 @@ function findAndCompare(){
 	$url2 = $_POST['website_url2'];
 	if(!empty($url1)&&!empty($url2)){
 		
-		$html1 = file_get_contents($url1);
-		$html2 = file_get_contents($url2);
+		$html1 = file_get_html($url1);
+		$html2 = file_get_html($url2);
 		
 		if(!empty($html1&&!empty($html2))){
 			$url1_links = array();
 			$url2_links = array();
-			if($html1 && is_object($html1)){
+			if($html1 && is_object($html1) && isset($html1->nodes)){
 				foreach($html1->find('a[href^="http://www.tuttosport.com"]') as $a)
 				{
 					if($a->href)
@@ -24,7 +24,7 @@ function findAndCompare(){
 					}
 				}	
 			}
-			if($html2 && is_object($html2)){
+			if($html2 && is_object($html2) && isset($html2->nodes)){
 				foreach($html2->find('a[href^="http://www.gazzetta.it"]') as $a)
 				{
 					if($a->href) 
