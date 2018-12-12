@@ -1,16 +1,21 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 header('Content-Disposition: attachment; filename=data.csv');
-include 'simplehtmldom_1_5/simple_html_dom.php';
+require_once('simplehtmldom_1_5/simple_html_dom.php');
 function findAndCompare(){
 	//storing user inputs into variables
 	//$uri = urlencode('http://...')
+	$context = stream_context_create(array(
+    'http' => array(
+        'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
+    ),
+	));
 	$url1 = $_POST['website_url1'];
 	$url2 = $_POST['website_url2'];
 	if(!empty($url1)&&!empty($url2)){
 		
-		$html1 = str_get_html(file_get_contents($url1));
-		$html2 = str_get_html(file_get_contents($url2));
+		$html1 = str_get_html(file_get_contents($url1, false, $context));
+		$html2 = str_get_html(file_get_contents($url2, false, $context));
 		
 		if(!empty($html1&&!empty($html2))){
 			$url1_links = array();
