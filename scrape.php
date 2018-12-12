@@ -1,6 +1,6 @@
 <?php
-//header('Content-Type: text/html; charset=utf-8');
-//header('Content-Disposition: attachment; filename=data.csv');
+header('Content-Type: text/html; charset=utf-8');
+header('Content-Disposition: attachment; filename=data.csv');
 include_once 'simplehtmldom_1_5/simple_html_dom.php';
 function findAndCompare(){
 	//storing user inputs into variables
@@ -30,14 +30,14 @@ function findAndCompare(){
 					$url2_links[]=$a->href;
 				}
 			}
-		//	$output = fopen('php://output', 'w');
+			$output = fopen('php://output', 'w');
 			foreach($url1_links as $val1)
 			{
 				foreach($url2_links as $val2)
 				{
 					$sim = similar_text($val1,$val2,$perc);
-					echo $val1."  ".$val2."  ".$sim."<br><br>";
-					//fputcsv($output, array($val1, $val2, $perc));
+					//echo $val1."  ".$val2."  ".$sim."<br><br>";
+					fputcsv($output, array($val1, $val2, $perc));
 				 }
 			}	
 		}
