@@ -1,7 +1,7 @@
 <?php
-header('Content-Type: text/csv; charset=utf-8');
+header('Content-Type: text/html; charset=utf-8');
 header('Content-Disposition: attachment; filename=data.csv');
-include_once 'simplehtmldom_1_5/simple_html_dom.php';
+include 'simplehtmldom_1_5/simple_html_dom.php';
 function findAndCompare(){
 	//storing user inputs into variables
 	//$uri = urlencode('http://...')
