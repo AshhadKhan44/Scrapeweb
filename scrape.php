@@ -9,8 +9,8 @@ function findAndCompare(){
 	$url2 = $_POST['website_url2'];
 	if(!empty($url1)&&!empty($url2)){
 		
-		$html1 = file_get_html($url1);
-		$html2 = file_get_html($url2);
+		$html1 = str_get_html(file_get_contents($url1));
+		$html2 = str_get_html(file_get_contents($url2));
 		
 		if(!empty($html1&&!empty($html2))){
 			$url1_links = array();
