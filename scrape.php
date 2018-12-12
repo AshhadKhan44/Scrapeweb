@@ -14,8 +14,6 @@ function findAndCompare(){
 	$opts = array('http'=>array('header' => "User-Agent:Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.75 Safari/537.1\r\n"));
 	$context = stream_context_create($opts);
 
-	
-	
 	$url1 = $_POST['website_url1'];
 	$url2 = $_POST['website_url2'];
 	if(!empty($url1) && !empty($url2)){
@@ -23,10 +21,9 @@ function findAndCompare(){
 		$html1 = file_get_html($url1, false, $context);
 		$html2 = file_get_html($url2, false, $context);
 		
-		if(!empty($html1&&!empty($html2))){
+		if(!empty($html1) && !empty($html2)){
 			$url1_links = array();
 			$url2_links = array();
-			if(is_object($html1)){
 				foreach($html1->find('a[href^="http://www.tuttosport.com"]') as $a)
 				{
 					if($a->href)
@@ -34,16 +31,14 @@ function findAndCompare(){
 						$url1_links[]=$a->href;
 					}
 				}	
-			}
-			if(is_object($html2)){
-				foreach($html2->find('a[href^="http://www.gazzetta.it"]') as $a)
+			foreach($html2->find('a[href^="http://www.gazzetta.it"]') as $a)
 				{
 					if($a->href) 
 					{
 						$url2_links[]=$a->href;
 					}
 				}	
-			}
+			
 	
 			
 			$output = fopen('php://output', 'w');
@@ -62,7 +57,6 @@ function findAndCompare(){
 }
 if(isset($_POST['submit']))
 {
-	
 	findAndCompare();
 }
 ?>    
